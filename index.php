@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Portfólio | Seu Nome</title>
+  <title>Portfólio | MAEL</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +35,7 @@
 </header>
 
 <footer class="bg-dark text-white text-center py-3 mt-5">
-  &copy; 2025 Seu Nome. Todos os direitos reservados.
+    Maelgamer998 &copy; 2025. Todos os direitos reservados.
 </footer>
 
 <!-- Scripts -->
