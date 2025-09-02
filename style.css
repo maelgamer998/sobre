@@ -1,49 +1,236 @@
-body {
-  font-family: Arial, sans-serif;
+/* ============================================
+   Variáveis
+============================================ */
+:root {
+  --orange: #fb923c;
+  --dark-bg: rgba(0,0,0,0.8);
+  --white: #ffffff;
+}
+
+/* ============================================
+   Reset e Body
+============================================ */
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  background: #f0f0f0;
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+  background-image: url('https://i.pinimg.com/originals/ad/f4/13/adf4132c2660e304837035f46c3b0839.gif');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  color: var(--white);
 }
 
+body {
+  position: relative;
+  min-height: 100vh;
+  padding-top: 100px; /* espaço para header fixo */
+}
+
+/* Overlay escuro */
+.bg-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  z-index: -1;
+}
+
+/* ============================================
+   Navbar flutuante
+============================================ */
 header {
-  background-color: #222;
-  color: white;
-  padding: 10px;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  width: max-content;
+  background-color: var(--dark-bg);
+  border-radius: 50px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.navbar-icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.navbar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem 1.5rem;
+  border-radius: 35px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.navbar-icon i {
+  font-size: 2rem;
+  color: var(--white);
+}
+
+.navbar-icon span {
+  margin-left: 0.8rem;
+  color: var(--orange);
+  opacity: 0;
+  transition: opacity 0.3s, margin-left 0.3s;
+  white-space: nowrap;
+}
+
+.navbar-icon.active,
+.navbar-icon:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+.navbar-icon.active span,
+.navbar-icon:hover span {
+  opacity: 1;
+}
+
+.appearence-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--white);
+}
+
+/* ============================================
+   Hero
+============================================ */
+#home h2 {
+  line-height: 1.2;
   text-align: center;
 }
 
-nav a {
-  color: white;
-  margin: 0 15px;
-  text-decoration: none;
+#home p {
+  max-width: 700px;
+  margin: 1rem auto;
+  line-height: 1.6;
+  text-align: center;
 }
 
-main {
-  padding: 20px;
-  max-width: 800px;
-  margin: auto;
+/* ============================================
+   Projetos
+============================================ */
+#projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
 }
 
+#projects-grid .bg-white {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background-color: var(--white);
+  color: #000;
+  transition: transform 0.3s;
+}
+
+#projects-grid .bg-white:hover {
+  transform: scale(1.05);
+}
+
+#projects-grid img {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+}
+
+#projects-grid i {
+  font-size: 1.25rem;
+}
+
+/* ============================================
+   Sobre
+============================================ */
+#sobre p {
+  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ============================================
+   Contato
+============================================ */
+#contato a {
+  transition: all 0.3s;
+}
+
+/* ============================================
+   Footer
+============================================ */
 footer {
+  margin-top: 2rem;
+  padding: 1.5rem 0;
   text-align: center;
-  background: #222;
-  color: white;
-  padding: 10px;
-  margin-top: 20px;
 }
 
-.botao {
-  display: inline-block;
-  padding: 10px 20px;
-  background: #4CAF50;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
+/* ============================================
+   Dark Mode
+============================================ */
+body.dark {
+  background-color: #111 !important;
+  color: #f0f0f0;
 }
 
-.projeto {
-  background: white;
-  margin-bottom: 15px;
-  padding: 15px;
-  border-radius: 8px;
+body.dark .navbar {
+  background-color: rgba(0,0,0,0.95);
+}
+
+body.dark .navbar-icon span {
+  color: var(--white);
+}
+
+body.dark #projects-grid .bg-white {
+  background-color: #1f1f1f;
+  color: #f0f0f0;
+}
+
+body.dark #projects-grid a {
+  color: var(--orange);
+}
+
+/* ============================================
+   Responsivo
+============================================ */
+@media (max-width: 768px) {
+  #home h2 {
+    font-size: 3rem;
+  }
+  #home p {
+    font-size: 1rem;
+  }
+  .navbar {
+    padding: 1rem;
+  }
+  .navbar-icon {
+    padding: 0.8rem 1rem;
+  }
+  .navbar-icon i {
+    font-size: 1.5rem;
+  }
+  .navbar-icon span {
+    font-size: 1rem;
+  }
 }
