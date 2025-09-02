@@ -19,16 +19,69 @@
   <style>
     html { scroll-behavior:smooth; }
     body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial; }
+
     /* Navbar blur/frosted */
     .glass { backdrop-filter: blur(8px); background: rgba(0,0,0,.55); }
+
     /* Fix iFrame aspect ratio */
     .ratio { position: relative; width: 100%; padding-top: 56.25%; }
     .ratio iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius: 0.75rem; }
+
     /* Snake touch controls (mobile) */
     .dpad { display:grid; grid-template-columns:repeat(3,56px); gap:8px; place-items:center; margin:12px auto 0; }
     .dpad button { width:56px; height:56px; border-radius:10px; background:#1f2937; color:white; }
+
     /* Particles container behind everything */
     #tsparticles { position:fixed; inset:0; z-index:-1; }
+
+    /* Dropdown idioma melhorias */
+    #langMenu {
+      position: absolute;
+      right: 0;
+      margin-top: 0.25rem;
+      background-color: #1f2937;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3), 0 4px 6px -2px rgba(0,0,0,0.2);
+      transition: all 0.2s ease-in-out;
+      transform-origin: top right;
+      z-index: 60;
+      opacity: 0;
+      transform: scaleY(0);
+      display: none;
+    }
+
+    #langMenu.show {
+      opacity: 1;
+      transform: scaleY(1);
+      display: block;
+    }
+
+    #langMenu li {
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.2s ease-in-out;
+    }
+
+    #langMenu li:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+
+    #langBtn {
+      padding: 0.75rem 1rem;
+    }
+
+    /* Mobile: dropdown full-width */
+    @media (max-width: 768px) {
+      #langMenu {
+        right: 0;
+        left: 0;
+        width: auto;
+        border-radius: 0;
+      }
+    }
   </style>
 </head>
 <body class="bg-gray-900 text-white">
@@ -50,30 +103,21 @@
         <li><a class="hover:text-orange-400" href="#contato" data-i18n="nav_contact">Contato</a></li>
       </ul>
 
-<!-- Dropdown de Idioma -->
-<div class="relative">
-  <button id="langBtn" class="flex items-center gap-2 bg-gray-800 rounded-xl px-3 py-2 text-sm hover:bg-gray-700">
-    <!-- Ícone principal de idioma (SVG branco) -->
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" viewBox="0 0 640 640" fill="white">
-      <path d="M192 64C209.7 64 224 78.3 224 96L224 128L352 128C369.7 128 384 142.3 384 160C384 177.7 369.7 192 352 192L342.4 192L334 215.1C317.6 260.3 292.9 301.6 261.8 337.1C276 345.9 290.8 353.7 306.2 360.6L356.6 383L418.8 243C423.9 231.4 435.4 224 448 224C460.6 224 472.1 231.4 477.2 243L605.2 531C612.4 547.2 605.1 566.1 589 573.2C572.9 580.3 553.9 573.1 546.8 557L526.8 512L369.3 512L349.3 557C342.1 573.2 323.2 580.4 307.1 573.2C291 566 283.7 547.1 290.9 531L330.7 441.5L280.3 419.1C257.3 408.9 235.3 396.7 214.5 382.7C193.2 399.9 169.9 414.9 145 427.4L110.3 444.6C94.5 452.5 75.3 446.1 67.4 430.3C59.5 414.5 65.9 395.3 81.7 387.4L116.2 370.1C132.5 361.9 148 352.4 162.6 341.8C148.8 329.1 135.8 315.4 123.7 300.9L113.6 288.7C102.3 275.1 104.1 254.9 117.7 243.6C131.3 232.3 151.5 234.1 162.8 247.7L173 259.9C184.5 273.8 197.1 286.7 210.4 298.6C237.9 268.2 259.6 232.5 273.9 193.2L274.4 192L64.1 192C46.3 192 32 177.7 32 160C32 142.3 46.3 128 64 128L160 128L160 96C160 78.3 174.3 64 192 64zM448 334.8L397.7 448L498.3 448L448 334.8z"/>
-    </svg>
-
-    <span id="langLabel">🇧🇷</span>
-    <i class="fa-solid fa-chevron-down text-xs"></i>
-  </button>
-
-  <ul id="langMenu" class="absolute right-0 mt-1 w-44 bg-gray-800 rounded-xl shadow-lg hidden z-50">
-    <li class="px-4 py-2 hover:bg-gray-700 cursor-pointer flex items-center gap-2" data-lang="pt">
-      <i class="fa-solid fa-earth-americas text-white"></i> Português
-    </li>
-    <li class="px-4 py-2 hover:bg-gray-700 cursor-pointer flex items-center gap-2" data-lang="en">
-      <i class="fa-solid fa-earth-europe text-white"></i> Inglês
-    </li>
-  </ul>
-</div>
-
-
+      <!-- Dropdown de Idioma -->
+      <div class="relative">
+        <button id="langBtn" class="flex items-center gap-2 bg-gray-800 rounded-xl text-sm hover:bg-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" viewBox="0 0 640 640" fill="white">
+            <path d="M192 64C209.7 64 224 78.3 224 96L224 128L352 128C369.7 128 384 142.3 384 160C384 177.7 369.7 192 352 192L342.4 192L334 215.1C317.6 260.3 292.9 301.6 261.8 337.1C276 345.9 290.8 353.7 306.2 360.6L356.6 383L418.8 243C423.9 231.4 435.4 224 448 224C460.6 224 472.1 231.4 477.2 243L605.2 531C612.4 547.2 605.1 566.1 589 573.2C572.9 580.3 553.9 573.1 546.8 557L526.8 512L369.3 512L349.3 557C342.1 573.2 323.2 580.4 307.1 573.2C291 566 283.7 547.1 290.9 531L330.7 441.5L280.3 419.1C257.3 408.9 235.3 396.7 214.5 382.7C193.2 399.9 169.9 414.9 145 427.4L110.3 444.6C94.5 452.5 75.3 446.1 67.4 430.3C59.5 414.5 65.9 395.3 81.7 387.4L116.2 370.1C132.5 361.9 148 352.4 162.6 341.8C148.8 329.1 135.8 315.4 123.7 300.9L113.6 288.7C102.3 275.1 104.1 254.9 117.7 243.6C131.3 232.3 151.5 234.1 162.8 247.7L173 259.9C184.5 273.8 197.1 286.7 210.4 298.6C237.9 268.2 259.6 232.5 273.9 193.2L274.4 192L64.1 192C46.3 192 32 177.7 32 160C32 142.3 46.3 128 64 128L160 128L160 96C160 78.3 174.3 64 192 64zM448 334.8L397.7 448L498.3 448L448 334.8z"/>
+          </svg>
+          <span id="langLabel">🇧🇷</span>
+          <i class="fa-solid fa-chevron-down text-xs"></i>
+        </button>
+        <ul id="langMenu">
+          <li data-lang="pt"><i class="fa-solid fa-earth-americas text-white"></i> BR</li>
+          <li data-lang="en"><i class="fa-solid fa-earth-europe text-white"></i> EN</li>
+        </ul>
       </div>
+
     </nav>
   </header>
 
@@ -90,7 +134,6 @@
       <a href="#contato" class="bg-gray-800 border border-gray-700 px-5 py-3 rounded-xl hover:bg-gray-700" data-i18n="btn_contact">Falar comigo</a>
     </div>
   </section>
-
   <!-- Projetos (GitHub) -->
   <section id="projetos" class="py-20 px-5" data-aos="fade-right">
     <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-i18n="projects_title">Projetos Recentes</h2>
@@ -210,7 +253,11 @@
       }});
     })();
 
-    // Multilingue PT/EN com dropdown
+    // Dropdown idioma
+    const langBtn = document.getElementById('langBtn');
+    const langMenu = document.getElementById('langMenu');
+    const langLabel = document.getElementById('langLabel');
+
     const i18n = {
       en:{nav_home:"Home",nav_projects:"Projects",nav_videos:"Videos",nav_blog:"Blog",
       nav_skills:"Skills",nav_experience:"Experience",nav_contact:"Contact",
@@ -219,61 +266,36 @@
       projects_title:"Recent Projects",video_title:"Projects in Video",
       blog_title:"Latest Articles",blog_note:"Tip: publish on Dev.to to show up here automatically.",
       xp_title:"Experience",xp_now:"Now",
-      xp_2025:"Open Source, full-stack projects and automations.",
-      xp_2024:"API integrations, PHP/MySQL/Tailwind, dashboards.",
-      xp_2023:"Modern front-end foundation and version control.",
-      score:"Score",best:"Best",pause:"Pause",
-      controls:"Arrows or WASD to move • P to pause",
-      contact_title:"Contact",ph_name:"Your name",ph_email:"Your email",ph_message:"Your message",send:"Send"},
+      xp_2025:"Open Source, Freelancer",xp_2024:"Dev Junior"},
       pt:{nav_home:"Início",nav_projects:"Projetos",nav_videos:"Vídeos",nav_blog:"Blog",
       nav_skills:"Skills",nav_experience:"Experiência",nav_contact:"Contato",
       btn_cv:"Baixar CV",btn_contact:"Falar comigo",
       hero_title:"Meu Portfólio no GitHub",hero_sub:"Confira meus projetos e contribuições. Tecnologias modernas e código limpo.",
       projects_title:"Projetos Recentes",video_title:"Projetos em Vídeo",
-      blog_title:"Últimos Artigos",blog_note:"Dica: publique no Dev.to para aparecer aqui automaticamente.",
-      xp_title:"Experiência",xp_now:"Atual",
-      xp_2025:"Open Source, projetos full-stack e automações.",
-      xp_2024:"Integrações com APIs, PHP/MySQL/Tailwind, dashboards.",
-      xp_2023:"Fundação em front-end moderno e versionamento.",
-      score:"Pontuação",best:"Recorde",pause:"Pausar",
-      controls:"Setas ou WASD para mover • P para pausar",
-      contact_title:"Contato",ph_name:"Seu nome",ph_email:"Seu e-mail",ph_message:"Sua mensagem",send:"Enviar"}
+      blog_title:"Últimas Postagens",blog_note:"Dica: publique no Dev.to para aparecer aqui automaticamente.",
+      xp_title:"Experiência",xp_now:"Agora",
+      xp_2025:"Open Source, Freelancer",xp_2024:"Dev Junior"}
     };
 
-    const langBtn = document.getElementById('langBtn');
-    const langMenu = document.getElementById('langMenu');
-    const langLabel = document.getElementById('langLabel');
-
-    function applyLang(lang){
-      document.querySelectorAll("[data-i18n]").forEach(el=>{
-        const key=el.dataset.i18n;
-        if(i18n[lang]?.[key]) el.textContent=i18n[lang][key];
-      });
-      document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
-        const key=el.dataset.i18nPlaceholder;
-        if(i18n[lang]?.[key]) el.placeholder=i18n[lang][key];
-      });
-      localStorage.setItem('lang',lang);
-      document.documentElement.lang = lang==='pt'?'pt':'en';
-    }
-
-    langBtn.addEventListener('click',()=>langMenu.classList.toggle('hidden'));
-    langMenu.querySelectorAll('li').forEach(item=>{
-      item.addEventListener('click',()=>{
-        const lang=item.dataset.lang;
-        langLabel.textContent=lang==='pt'?'BR':'EN';
-        applyLang(lang);
-        langMenu.classList.add('hidden');
+    langBtn.addEventListener('click', ()=>{
+      langMenu.classList.toggle('show');
+    });
+    document.addEventListener('click', e=>{
+      if(!langBtn.contains(e.target) && !langMenu.contains(e.target)) {
+        langMenu.classList.remove('show');
+      }
+    });
+    langMenu.querySelectorAll('li').forEach(li=>{
+      li.addEventListener('click', ()=>{
+        const lang = li.dataset.lang;
+        langLabel.innerText = lang === 'pt' ? '🇧🇷':'🇺🇸';
+        document.querySelectorAll('[data-i18n]').forEach(el=>{
+          const key = el.dataset.i18n;
+          if(i18n[lang][key]) el.innerText = i18n[lang][key];
+        });
+        langMenu.classList.remove('show');
       });
     });
-    document.addEventListener('click',e=>{
-      if(!langBtn.contains(e.target) && !langMenu.contains(e.target)) langMenu.classList.add('hidden');
-    });
-    (()=>{
-      const saved=localStorage.getItem('lang')||'pt';
-      langLabel.textContent=saved==='pt'?'BR':'EN';
-      applyLang(saved);
-    })();
 
     /* ===== GitHub Projects (melhorados) ===== */
     async function fetchGitHubProjects(username){
