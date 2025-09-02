@@ -1,194 +1,490 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfólio GitHub - Ismael Loreto</title>
-  
-  <!-- Tailwind CSS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ismael Loreto — Portfólio</title>
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
   <!-- Devicon -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.15.1/devicon.min.css">
-  <!-- Fonte -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- CSS Custom -->
-  <link rel="stylesheet" href="style.css" />
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+  <!-- tsParticles (background) -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@3/tsparticles.bundle.min.js"></script>
+
+  <style>
+    html { scroll-behavior:smooth; }
+    body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial; }
+    /* Navbar blur/frosted */
+    .glass { backdrop-filter: blur(8px); background: rgba(0,0,0,.55); }
+    /* Fix iFrame aspect ratio */
+    .ratio { position: relative; width: 100%; padding-top: 56.25%; }
+    .ratio iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius: 0.75rem; }
+    /* Snake touch controls (mobile) */
+    .dpad { display:grid; grid-template-columns:repeat(3,56px); gap:8px; place-items:center; margin:12px auto 0; }
+    .dpad button { width:56px; height:56px; border-radius:10px; background:#1f2937; color:white; }
+    /* Particles container behind everything */
+    #tsparticles { position:fixed; inset:0; z-index:-1; }
+  </style>
 </head>
-<body class="text-white">
+<body class="bg-gray-900 text-white">
 
-  <!-- Overlay escura -->
-  <div class="bg-overlay"></div>
+  <!-- Particles background -->
+  <div id="tsparticles"></div>
 
-  <!-- Navbar flutuante -->
-  <header class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
-    <div class="navbar flex items-center px-6 py-4">
-      <!-- Logo -->
-      <div class="logo flex items-center gap-2 mr-8">
-        <img src="https://minepfp.free.nf/imagens/logo.png" alt="Logo" class="w-10 h-10 rounded-full">
-        <span class="text-orange-500 font-bold text-xl">Ismael</span>
+  <!-- Navbar enxuta -->
+  <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[min(1100px,95%)] glass rounded-2xl shadow-lg">
+    <nav class="flex items-center justify-between px-5 py-3">
+      <div class="flex items-center gap-3">
+        <img src="https://minepfp.free.nf/imagens/logo.png" class="w-10 h-10 rounded-full" alt="Logo">
+        <strong class="text-orange-400">Ismael</strong>
       </div>
-      <!-- Navbar -->
-      <ul class="navbar-icons flex gap-4">
-        <li class="navbar-icon active">
-          <i class="fa-solid fa-house-user"></i>
-          <span>Home</span>
-        </li>
-        <li class="navbar-icon">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <span>Search</span>
-        </li>
-        <li class="navbar-icon">
-          <i class="fa-regular fa-message"></i>
-          <span>Message</span>
-        </li>
-        <li class="navbar-icon">
-          <button onclick="toggleDarkMode()" class="appearence-btn"><i class="fa-solid fa-moon"></i></button>
-          <span>Mode</span>
-        </li>
-        <li class="navbar-icon">
-          <i class="fa-regular fa-circle-user"></i>
-          <span>Profile</span>
-        </li>
+      <ul class="hidden md:flex items-center gap-6 text-sm">
+        <li><a class="hover:text-orange-400" href="#home" data-i18n="nav_home">Início</a></li>
+        <li><a class="hover:text-orange-400" href="#projetos" data-i18n="nav_projects">Projetos</a></li>
+        <li><a class="hover:text-orange-400" href="#xp" data-i18n="nav_experience">Experiência</a></li>
+        <li><a class="hover:text-orange-400" href="#contato" data-i18n="nav_contact">Contato</a></li>
       </ul>
-    </div>
+      <div class="flex items-center gap-3">
+        <a href="cv_ismael_loreto.pdf" class="hidden sm:inline-flex bg-orange-500 hover:bg-orange-600 px-3 py-2 rounded-xl text-sm font-semibold" download data-i18n="btn_cv">Baixar CV</a>
+        <select id="langSwitcher" class="bg-gray-800 rounded-xl px-2 py-2 text-sm">
+          <option value="pt"><i class="bi bi-translate"></i> BR</option>
+          <option value="en"><i class="bi bi-translate"></i> EN</option>
+        </select>
+      </div>
+    </nav>
   </header>
 
-  <!-- Main Content -->
-  <div class="main-content">
+  <!-- Hero -->
+  <section id="home" class="pt-40 pb-24 text-center" data-aos="fade-up">
+    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-orange-400 mb-4" data-i18n="hero_title">
+      Meu Portfólio no GitHub
+    </h1>
+    <p class="max-w-2xl mx-auto text-gray-300 text-lg md:text-xl" data-i18n="hero_sub">
+      Confira meus projetos e contribuições. Tecnologias modernas e código limpo.
+    </p>
+    <div class="mt-8 flex items-center justify-center gap-3">
+      <a href="https://github.com/maelgamer998" target="_blank" class="bg-white text-gray-900 font-semibold px-5 py-3 rounded-xl hover:bg-gray-100">GitHub</a>
+      <a href="#contato" class="bg-gray-800 border border-gray-700 px-5 py-3 rounded-xl hover:bg-gray-700" data-i18n="btn_contact">Falar comigo</a>
+    </div>
+  </section>
 
-    <!-- Hero -->
-    <section id="home" class="text-center py-32">
-      <h2 class="text-5xl font-extrabold mb-4 text-orange-500">Meu Portfólio no GitHub</h2>
-      <p class="text-xl mb-8 text-gray-200 max-w-2xl mx-auto">Confira meus projetos e contribuições. Tecnologias modernas e código limpo.</p>
-      <a href="https://github.com/seu-usuario" target="_blank" class="bg-white text-orange-600 font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-gray-100 transition">Visitar GitHub</a>
-    </section>
+  <!-- Projetos (GitHub) -->
+  <section id="projetos" class="py-20 px-5" data-aos="fade-right">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-i18n="projects_title">Projetos Recentes</h2>
+    <div id="projects-grid" class="max-w-6xl mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </section>
 
-<section id="skills" class="py-20 text-center">
-  <h2 class="text-4xl font-bold text-orange-500 mb-6">Habilidades</h2>
-  <div class="flex flex-wrap justify-center gap-8">
-    <i class="devicon-html5-plain text-6xl text-orange-500"></i>
-    <i class="devicon-css3-plain text-6xl text-blue-500"></i>
-    <i class="devicon-javascript-plain text-6xl text-yellow-400"></i>
-    <i class="devicon-php-plain text-6xl text-purple-500"></i>
-    <i class="devicon-mysql-plain text-6xl text-blue-600"></i>
-  </div>
-</section>
+  <!-- Vídeos (YouTube embeds) -->
+  <section id="videos" class="py-20 px-5 bg-gray-800/40" data-aos="fade-left">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-i18n="video_title">Projetos em Vídeo</h2>
+    <div id="videos-grid" class="max-w-6xl mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Preenche pelo JS com a lista videoIds -->
+    </div>
+  </section>
 
-    <!-- Projetos -->
-    <section id="projetos" class="container mx-auto px-6 py-20">
-      <h2 class="text-4xl font-bold text-white text-center mb-12">Projetos Recentes</h2>
-      <div id="projects-grid" class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Projetos carregados via JS -->
-      </div>
-    </section>
-    
-  <!-- Timeline -->
-  <section id="timeline" class="py-20" data-aos="fade-left">
-    <h2 class="text-4xl font-bold text-orange-500 text-center mb-12">Minha Jornada</h2>
-    <div class="max-w-4xl mx-auto relative border-l border-gray-600">
+  <!-- Blog (DEV.to) -->
+  <section id="blog" class="py-20 px-5" data-aos="fade-up">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-i18n="blog_title">Últimos Artigos</h2>
+    <div id="blog-posts" class="max-w-6xl mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    <p class="text-center mt-6 text-gray-400 text-sm" data-i18n="blog_note">Dica: publique no Dev.to para aparecer aqui automaticamente.</p>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="py-20 px-5 bg-gray-800/40" data-aos="fade-right">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Skills</h2>
+    <div class="max-w-4xl mx-auto flex flex-wrap justify-center gap-10 text-6xl">
+      <i class="devicon-html5-plain colored"></i>
+      <i class="devicon-css3-plain colored"></i>
+      <i class="devicon-javascript-plain colored"></i>
+      <i class="devicon-php-plain colored"></i>
+      <i class="devicon-mysql-plain colored"></i>
+    </div>
+  </section>
+
+  <!-- Experiência / Timeline -->
+  <section id="xp" class="py-20 px-5" data-aos="fade-left">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-i18n="xp_title">Experiência</h2>
+    <div class="max-w-3xl mx-auto relative border-l border-gray-700">
       <div class="mb-10 ml-6">
         <div class="absolute w-3 h-3 bg-orange-500 rounded-full -left-1.5 mt-1.5"></div>
-        <h3 class="text-xl font-bold text-white">2025</h3>
-        <p class="text-gray-300">Projetos Open Source no GitHub.</p>
+        <h3 class="text-xl font-bold">2025 — <span data-i18n="xp_now">Atual</span></h3>
+        <p class="text-gray-300" data-i18n="xp_2025">Open Source, projetos full-stack e automações.</p>
       </div>
       <div class="mb-10 ml-6">
         <div class="absolute w-3 h-3 bg-orange-500 rounded-full -left-1.5 mt-1.5"></div>
-        <h3 class="text-xl font-bold text-white">2024</h3>
-        <p class="text-gray-300">Full-stack com PHP/MySQL.</p>
+        <h3 class="text-xl font-bold">2024</h3>
+        <p class="text-gray-300" data-i18n="xp_2024">Integrações com APIs, PHP/MySQL/Tailwind, dashboards.</p>
+      </div>
+      <div class="mb-10 ml-6">
+        <div class="absolute w-3 h-3 bg-orange-500 rounded-full -left-1.5 mt-1.5"></div>
+        <h3 class="text-xl font-bold">2023</h3>
+        <p class="text-gray-300" data-i18n="xp_2023">Fundação em front-end moderno e versionamento.</p>
       </div>
     </div>
   </section>
-    
-<section id="stats" class="text-center py-20">
-  <h2 class="text-4xl font-bold text-orange-500 mb-6">GitHub Stats</h2>
-  <img src="https://github-readme-stats.vercel.app/api?username=maelgamer998&show_icons=true&theme=radical" class="mx-auto mb-6"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=maelgamer998&layout=compact&theme=radical" class="mx-auto"/>
-</section>
 
-    <!-- Sobre -->
-    <section id="sobre" class="py-20 text-center">
-      <h2 class="text-4xl font-bold text-orange-500 mb-6">Sobre Mim</h2>
-      <p class="text-gray-300 text-lg max-w-3xl mx-auto">Sou desenvolvedor web e apaixonado por tecnologia. Trabalho com projetos que envolvem front-end, back-end e design de interfaces modernas.</p>
-    </section>
+  <!-- Mini-game: Snake -->
+  <section id="game" class="py-20 px-5 bg-gray-800/40" data-aos="zoom-in">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Snake Game</h2>
+    <div class="max-w-xl mx-auto bg-black rounded-2xl p-4 border border-gray-700">
+      <canvas id="snake" width="480" height="480" class="w-full rounded-lg border-2 border-orange-500"></canvas>
+      <div class="mt-3 flex items-center justify-between text-sm">
+        <div><span class="text-gray-400" data-i18n="score">Pontuação</span>: <b id="score">0</b> | <span class="text-gray-400" data-i18n="best">Recorde</span>: <b id="best">0</b></div>
+        <div class="flex gap-2">
+          <button id="btnPause" class="px-3 py-1.5 rounded bg-gray-800 border border-gray-700 hover:bg-gray-700" data-i18n="pause">Pausar</button>
+          <button id="btnRestart" class="px-3 py-1.5 rounded bg-orange-600 hover:bg-orange-700">Restart</button>
+        </div>
+      </div>
+      <!-- Controles touch -->
+      <div class="dpad md:hidden">
+        <div></div><button data-dir="up">⬆️</button><div></div>
+        <button data-dir="left">⬅️</button><div></div><button data-dir="right">➡️</button>
+        <div></div><button data-dir="down">⬇️</button><div></div>
+      </div>
+      <p class="text-center text-gray-400 mt-2 text-xs" data-i18n="controls">Setas ou WASD para mover • P para pausar</p>
+    </div>
+  </section>
 
-    <!-- Contato -->
-    <section id="contato" class="text-center py-20">
-      <h2 class="text-4xl font-bold text-orange-500 mb-6">Contato</h2>
-      <p class="text-gray-200 mb-6">Entre em contato comigo através do GitHub ou envie um email diretamente.</p>
-      <a href="mailto:seu-email@email.com" class="bg-orange-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-orange-700 transition">Enviar Email</a>
-    </section>
+  <!-- Contato -->
+  <section id="contato" class="py-20 px-5" data-aos="fade-up">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-8" data-i18n="contact_title">Contato</h2>
+    <form action="https://formspree.io/f/your-id" method="POST" class="max-w-xl mx-auto space-y-4">
+      <input name="name" required class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700" placeholder="Seu nome" data-i18n-placeholder="ph_name">
+      <input name="email" type="email" required class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700" placeholder="Seu e-mail" data-i18n-placeholder="ph_email">
+      <textarea name="message" rows="4" required class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700" placeholder="Sua mensagem" data-i18n-placeholder="ph_message"></textarea>
+      <button class="w-full bg-orange-600 hover:bg-orange-700 py-3 rounded-lg font-semibold" data-i18n="send">Enviar</button>
+    </form>
+    <div class="mt-6 flex items-center justify-center gap-4 text-xl">
+      <a href="https://github.com/maelgamer998" target="_blank" class="hover:text-orange-400"><i class="fa-brands fa-github"></i></a>
+      <!-- adicione suas redes -->
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="bg-black bg-opacity-80 text-white text-center py-6">
-      <p>&copy; 2025 Ismael Loreto. Todos os direitos reservados.</p>
-    </footer>
-
-  </div>
+  <footer class="py-6 text-center text-gray-400 border-t border-gray-800">
+    <p>&copy; 2025 Ismael Loreto</p>
+  </footer>
 
   <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init({ once:true, duration:700, easing:'ease-out-cubic' });</script>
+
   <script>
-    // Dark Mode
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark');
-    }
+    /* ===== tsParticles background (laranja/branco suave) ===== */
+    (async () => {
+      const engine = await tsParticles.load({ id: "tsparticles", options: {
+        background: { color: "transparent" },
+        fpsLimit: 60,
+        particles: {
+          number: { value: 60, density: { enable: true, area: 800 } },
+          color: { value: ["#f97316", "#ffffff"] },
+          shape: { type: "circle" },
+          opacity: { value: 0.35 },
+          size: { value: { min: 1, max: 3 } },
+          move: { enable: true, speed: 1.2, outModes: { default: "out" } },
+          links: { enable: true, opacity: 0.2, distance: 120, color:"#f97316" }
+        },
+        detectRetina: true
+      }});
+    })();
 
-    // Ícones por linguagem Devicon
-    function getLanguageIconClass(lang) {
-      switch(lang) {
-        case "JavaScript": return "devicon-javascript-plain";
-        case "Python": return "devicon-python-plain";
-        case "HTML": return "devicon-html5-plain";
-        case "CSS": return "devicon-css3-plain";
-        case "Java": return "devicon-java-plain";
-        case "C++": return "devicon-cplusplus-plain";
-        case "PHP": return "devicon-php-plain";
-        case "TypeScript": return "devicon-typescript-plain";
-        default: return "devicon-github-plain";
+    /* ===== Multilingue PT/EN (guarda no localStorage) ===== */
+    const i18n = {
+      en: {
+        nav_home:"Home", nav_projects:"Projects", nav_videos:"Videos", nav_blog:"Blog",
+        nav_skills:"Skills", nav_experience:"Experience", nav_contact:"Contact",
+        btn_cv:"Download CV", btn_contact:"Contact me",
+        hero_title:"My GitHub Portfolio",
+        hero_sub:"Check out my projects and contributions. Modern technologies and clean code.",
+        projects_title:"Recent Projects",
+        video_title:"Projects in Video",
+        blog_title:"Latest Articles",
+        blog_note:"Tip: publish on Dev.to to show up here automatically.",
+        xp_title:"Experience", xp_now:"Now",
+        xp_2025:"Open Source, full-stack projects and automations.",
+        xp_2024:"API integrations, PHP/MySQL/Tailwind, dashboards.",
+        xp_2023:"Modern front-end foundation and version control.",
+        score:"Score", best:"Best", pause:"Pause",
+        controls:"Arrows or WASD to move • P to pause",
+        contact_title:"Contact",
+        ph_name:"Your name", ph_email:"Your email", ph_message:"Your message",
+        send:"Send"
+      },
+      pt: {
+        nav_home:"Início", nav_projects:"Projetos", nav_videos:"Vídeos", nav_blog:"Blog",
+        nav_skills:"Skills", nav_experience:"Experiência", nav_contact:"Contato",
+        btn_cv:"Baixar CV", btn_contact:"Falar comigo",
+        hero_title:"Meu Portfólio no GitHub",
+        hero_sub:"Confira meus projetos e contribuições. Tecnologias modernas e código limpo.",
+        projects_title:"Projetos Recentes",
+        video_title:"Projetos em Vídeo",
+        blog_title:"Últimos Artigos",
+        blog_note:"Dica: publique no Dev.to para aparecer aqui automaticamente.",
+        xp_title:"Experiência", xp_now:"Atual",
+        xp_2025:"Open Source, projetos full-stack e automações.",
+        xp_2024:"Integrações com APIs, PHP/MySQL/Tailwind, dashboards.",
+        xp_2023:"Fundação em front-end moderno e versionamento.",
+        score:"Pontuação", best:"Recorde", pause:"Pausar",
+        controls:"Setas ou WASD para mover • P para pausar",
+        contact_title:"Contato",
+        ph_name:"Seu nome", ph_email:"Seu e-mail", ph_message:"Sua mensagem",
+        send:"Enviar"
       }
+    };
+    const langSel = document.getElementById('langSwitcher');
+    function applyLang(lang) {
+      document.querySelectorAll("[data-i18n]").forEach(el=>{
+        const key = el.dataset.i18n;
+        if(i18n[lang]?.[key]) el.textContent = i18n[lang][key];
+      });
+      document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+        const key = el.dataset.i18nPlaceholder;
+        if(i18n[lang]?.[key]) el.placeholder = i18n[lang][key];
+      });
+      localStorage.setItem('lang', lang);
+      document.documentElement.lang = lang === 'pt' ? 'pt' : 'en';
     }
+    (()=>{
+      const saved = localStorage.getItem('lang') || 'pt';
+      langSel.value = saved; applyLang(saved);
+    })();
+    langSel.addEventListener('change', e=> applyLang(e.target.value));
 
-    // Buscar projetos GitHub
-    async function fetchGitHubProjects(username) {
-      const url = `https://api.github.com/users/${username}/repos?sort=updated&per_page=6`;
-      try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('Erro ao buscar projetos');
-        const repos = await response.json();
+    /* ===== GitHub Projects (melhorados) ===== */
+    async function fetchGitHubProjects(username){
+      const url = `https://api.github.com/users/${username}/repos?sort=updated&per_page=6&type=owner`;
+      try{
+        const res = await fetch(url);
+        if(!res.ok) throw new Error('GitHub API error');
+        const repos = await res.json();
         const grid = document.getElementById('projects-grid');
         grid.innerHTML = '';
-        repos.forEach(repo => {
-          const card = document.createElement('div');
-          card.className = "bg-white text-black rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 transform transition";
-
-          const repoName = repo.name;
-          const repoDesc = repo.description ? repo.description : "Sem descrição";
-          const repoUrl = repo.html_url;
-          const repoLang = repo.language ? repo.language : "Sem linguagem";
-          const langIconClass = getLanguageIconClass(repoLang);
-
-          card.innerHTML = `
-            <img src="default.png" alt="${repoName}" class="w-full h-48 object-cover">
-            <div class="p-6">
-              <h3 class="font-bold text-xl mb-2">${repoName}</h3>
-              <p class="text-gray-700 mb-4">${repoDesc}</p>
-              <div class="mb-4 flex items-center gap-2">
-                <i class="${langIconClass} text-xl"></i>
-                <span class="text-xs font-semibold">${repoLang}</span>
+        repos
+          .filter(r => !r.fork)
+          .forEach(repo=>{
+            const card = document.createElement('article');
+            card.className = "bg-white text-gray-900 rounded-2xl p-5 shadow hover:shadow-xl hover:-translate-y-1 transition";
+            card.innerHTML = `
+              <h3 class="font-extrabold text-lg mb-1">${repo.name}</h3>
+              <p class="text-sm text-gray-700 mb-3">${repo.description ?? "Sem descrição"}</p>
+              <div class="flex items-center gap-4 text-xs text-gray-600 mb-3">
+                <span><i class="fa-regular fa-star"></i> ${repo.stargazers_count}</span>
+                <span><i class="fa-solid fa-code-fork"></i> ${repo.forks_count}</span>
+                <span><i class="fa-regular fa-clock"></i> ${new Date(repo.updated_at).toLocaleDateString()}</span>
               </div>
-              <a href="${repoUrl}" target="_blank" class="text-orange-600 font-semibold hover:underline">Ver no GitHub</a>
-            </div>
-          `;
-          grid.appendChild(card);
-        });
-      } catch (error) {
-        console.error(error);
-        document.getElementById('projects-grid').innerHTML = "<p class='text-white'>Não foi possível carregar os projetos.</p>";
+              <a class="inline-flex items-center gap-2 text-orange-600 font-semibold hover:underline" href="${repo.html_url}" target="_blank">
+                Ver no GitHub <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+              </a>
+            `;
+            grid.appendChild(card);
+          });
+      }catch(e){
+        document.getElementById('projects-grid').innerHTML =
+          `<p class="text-center text-gray-300">Não foi possível carregar os projetos.</p>`;
       }
     }
-
     fetchGitHubProjects('maelgamer998');
+
+    /* ===== YouTube embeds (troque os IDs abaixo) ===== */
+    const videoIds = [
+      "dQw4w9WgXcQ", // exemplo — troque pelos seus
+      "5qap5aO4i9A",
+      "jNQXAC9IVRw"
+    ];
+    (function renderVideos(){
+      const grid = document.getElementById('videos-grid');
+      grid.innerHTML = '';
+      videoIds.forEach(id=>{
+        const card = document.createElement('article');
+        card.className = "rounded-2xl overflow-hidden bg-white/5 border border-white/10 shadow";
+        card.innerHTML = `
+          <div class="ratio">
+            <iframe loading="lazy"
+              src="https://www.youtube.com/embed/${id}"
+              title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    })();
+
+    /* ===== Blog do Dev.to (troque DEVTO_USER) ===== */
+    const DEVTO_USER = "seu-usuario";
+    async function fetchBlog(){
+      const url = `https://dev.to/api/articles?username=${DEVTO_USER}`;
+      try{
+        const res = await fetch(url);
+        if(!res.ok) throw new Error('Dev.to API error');
+        const posts = await res.json();
+        const wrap = document.getElementById('blog-posts');
+        wrap.innerHTML = '';
+        posts.slice(0,6).forEach(p=>{
+          const card = document.createElement('article');
+          card.className = "bg-white text-gray-900 rounded-2xl overflow-hidden shadow hover:shadow-xl transition";
+          card.innerHTML = `
+            <img src="${p.cover_image ?? 'https://picsum.photos/600/300?blur=1'}" class="w-full h-40 object-cover" alt="">
+            <div class="p-5">
+              <h3 class="font-bold text-lg mb-1">${p.title}</h3>
+              <p class="text-gray-700 text-sm mb-3">${p.description ?? ''}</p>
+              <div class="text-xs text-gray-600 mb-3">${new Date(p.published_at).toLocaleDateString()}</div>
+              <a href="${p.url}" target="_blank" class="inline-flex items-center gap-2 text-orange-600 font-semibold hover:underline">Ler mais <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>
+            </div>
+          `;
+          wrap.appendChild(card);
+        });
+      }catch(e){
+        document.getElementById('blog-posts').innerHTML =
+          `<p class="text-center text-gray-300">Configure seu usuário do Dev.to para exibir artigos.</p>`;
+      }
+    }
+    fetchBlog();
+
+    /* ===== Snake avançado ===== */
+    (function snake(){
+      const canvas = document.getElementById('snake');
+      const ctx = canvas.getContext('2d');
+      const tile = 24;                    // tamanho da célula
+      const cols = canvas.width / tile;
+      const rows = canvas.height / tile;
+      let dir = {x:1, y:0};
+      let nextDir = {x:1, y:0};
+      let snake = [{x:10, y:10}, {x:9,y:10}];
+      let apple = randApple();
+      let score = 0;
+      let best = Number(localStorage.getItem('snake_best')||0);
+      let speed = 130;                    // ms por tick (acelera comendo)
+      let paused = false;
+      let loopId;
+
+      const scoreEl = document.getElementById('score');
+      const bestEl = document.getElementById('best'); bestEl.textContent = best;
+      const btnPause = document.getElementById('btnPause');
+      const btnRestart = document.getElementById('btnRestart');
+
+      function randApple(){
+        let a;
+        do{
+          a = { x: Math.floor(Math.random()*cols), y: Math.floor(Math.random()*rows) };
+        } while (snake.some(s=>s.x===a.x && s.y===a.y));
+        return a;
+      }
+
+      function drawCell(x,y,color){
+        ctx.fillStyle = color;
+        ctx.fillRect(x*tile, y*tile, tile-1, tile-1);
+      }
+
+      function drawGrid(){
+        ctx.fillStyle = "#0a0a0a";
+        ctx.fillRect(0,0,canvas.width, canvas.height);
+        // grid leve
+        ctx.strokeStyle = "rgba(255,255,255,0.05)";
+        for(let i=0;i<cols;i++){ ctx.beginPath(); ctx.moveTo(i*tile,0); ctx.lineTo(i*tile,canvas.height); ctx.stroke(); }
+        for(let j=0;j<rows;j++){ ctx.beginPath(); ctx.moveTo(0,j*tile); ctx.lineTo(canvas.width,j*tile); ctx.stroke(); }
+      }
+
+      function step(){
+        if(paused) return;
+        dir = nextDir;
+        const head = { x: (snake[0].x + dir.x + cols) % cols,
+                       y: (snake[0].y + dir.y + rows) % rows };
+        // colisão com corpo
+        if (snake.some((s,idx)=> idx>0 && s.x===head.x && s.y===head.y)) {
+          gameOver(); return;
+        }
+        snake.unshift(head);
+        // comer
+        if(head.x===apple.x && head.y===apple.y){
+          score++;
+          scoreEl.textContent = score;
+          apple = randApple();
+          speed = Math.max(70, speed-5); // acelera até um limite
+          restartLoop();
+        } else {
+          snake.pop();
+        }
+        render();
+      }
+
+      function render(){
+        drawGrid();
+        // maçã
+        drawCell(apple.x, apple.y, "#f97316");
+        // cobra
+        snake.forEach((s, i)=>{
+          const c = i===0 ? "#ffffff" : "#f59e0b";
+          drawCell(s.x, s.y, c);
+        });
+      }
+
+      function startLoop(){
+        loopId = setInterval(step, speed);
+      }
+      function restartLoop(){
+        clearInterval(loopId); startLoop();
+      }
+
+      function gameOver(){
+        clearInterval(loopId);
+        if(score>best){ best=score; localStorage.setItem('snake_best', String(best)); bestEl.textContent = best; }
+        // overlay rápida
+        ctx.fillStyle = "rgba(0,0,0,0.6)";
+        ctx.fillRect(0,0,canvas.width, canvas.height);
+        ctx.fillStyle = "#fff"; ctx.textAlign="center";
+        ctx.font = "bold 26px Inter";
+        ctx.fillText("Game Over", canvas.width/2, canvas.height/2 - 10);
+        ctx.font = "14px Inter";
+        ctx.fillText("Pressione Restart", canvas.width/2, canvas.height/2 + 16);
+      }
+
+      function restart(){
+        clearInterval(loopId);
+        dir = {x:1,y:0}; nextDir = {x:1,y:0};
+        snake = [{x:10,y:10},{x:9,y:10}];
+        apple = randApple();
+        score = 0; scoreEl.textContent = score;
+        speed = 130; paused = false; btnPause.textContent = document.documentElement.lang==='en' ? 'Pause' : 'Pausar';
+        render(); startLoop();
+      }
+
+      // controles teclado
+      window.addEventListener('keydown', (e)=>{
+        const k = e.key.toLowerCase();
+        if(k==='w' || k==='arrowup'){ if(dir.y===0) nextDir={x:0,y:-1}; }
+        if(k==='s' || k==='arrowdown'){ if(dir.y===0) nextDir={x:0,y:1}; }
+        if(k==='a' || k==='arrowleft'){ if(dir.x===0) nextDir={x:-1,y:0}; }
+        if(k==='d' || k==='arrowright'){ if(dir.x===0) nextDir={x:1,y:0}; }
+        if(k==='p'){ togglePause(); }
+      });
+
+      // controles touch
+      document.querySelectorAll('.dpad button').forEach(b=>{
+        b.addEventListener('click', ()=>{
+          const d=b.dataset.dir;
+          if(d==='up' && dir.y===0) nextDir={x:0,y:-1};
+          if(d==='down' && dir.y===0) nextDir={x:0,y:1};
+          if(d==='left' && dir.x===0) nextDir={x:-1,y:0};
+          if(d==='right' && dir.x===0) nextDir={x:1,y:0};
+        });
+      });
+
+      function togglePause(){
+        paused = !paused;
+        btnPause.textContent = paused
+          ? (document.documentElement.lang==='en' ? 'Resume' : 'Retomar')
+          : (document.documentElement.lang==='en' ? 'Pause' : 'Pausar');
+      }
+      btnPause.addEventListener('click', togglePause);
+      btnRestart.addEventListener('click', restart);
+
+      // start
+      render(); startLoop();
+    })();
   </script>
 </body>
 </html>
