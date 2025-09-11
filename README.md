@@ -21,5 +21,5 @@ Sou desenvolvedor apaixonado por tecnologia, programação e jogos. 🚀
   🟢 Gera avatares (fotos de perfil) de skins do **Minecraft Java**.  
 - **[Modspire](https://modspire.free.nf/)**  
   🔵 Plataforma para upload de **Plugins, Mods, DataPacks e Shaders**, inspirada no [Modrinth](https://modrinth.com/).  
-- **[CRAFTZONE](https://craftone.free.nf/)**  
+- **[CRAFTZONE](https://craft\one.free.nf/)**  
   🟠 Painel completo para servidores de **Minecraft**, com **Dashboard** para loja, regras, blog, equipe e personalização do site.  
