@@ -13,4 +13,4 @@ Sou desenvolvedor apaixonado por tecnologia, programação e jogos. 🚀
 
 ## 🌐 Minhas redes
 - [Discord](https://discord.com/users/maelgamer998)
-- [Youtube]([https://twitter.com/seuusuario](https://www.youtube.com/@maelsontv))
+- [Youtube](https://www.youtube.com/@maelsontv)
