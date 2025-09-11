@@ -14,3 +14,12 @@ Sou desenvolvedor apaixonado por tecnologia, programação e jogos. 🚀
 ## 🌐 Minhas redes
 - [Discord](https://discord.com/users/maelgamer998)
 - [Youtube](https://www.youtube.com/@maelsontv)
+
+## 💠 Alguns de meus projetos
+
+- **[MinePFP](https://minepfp.free.nf/)**  
+  🟢 Gera avatares (fotos de perfil) de skins do **Minecraft Java**.  
+- **[Modspire](https://modspire.free.nf/)**  
+  🔵 Plataforma para upload de **Plugins, Mods, DataPacks e Shaders**, inspirada no [Modrinth](https://modrinth.com/).  
+- **[CRAFTZONE](https://craftone.free.nf/)**  
+  🟠 Painel completo para servidores de **Minecraft**, com **Dashboard** para loja, regras, blog, equipe e personalização do site.  
