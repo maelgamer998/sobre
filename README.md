@@ -7,13 +7,19 @@ Sou desenvolvedor apaixonado por tecnologia, programação e jogos. 🚀
 - 🌱 Estudando **HTML/CSS** e **Node.js e React.js**
 - 🎮 Curto Minecraft e desenvolvimento de Websites
 
+---
+
 ## 🔧 Tecnologias que uso
 - HTML | CSS | JavaScript | PHP
 - MySQL | Git | GitHub
 
+---
+
 ## 🌐 Minhas redes
 - [Discord](https://discord.com/users/maelgamer998)
 - [Youtube](https://www.youtube.com/@maelsontv)
+
+---
 
 ## 💠 Alguns de meus projetos
 
@@ -22,4 +28,6 @@ Sou desenvolvedor apaixonado por tecnologia, programação e jogos. 🚀
 - **[Modspire](https://modspire.free.nf/)**  
   🔵 Plataforma para upload de **Plugins, Mods, DataPacks e Shaders**, inspirada no [Modrinth](https://modrinth.com/).  
 - **[CRAFTZONE](https://craftzone.free.nf/)**  
-  🟠 Painel completo para servidores de **Minecraft**, com **Dashboard** para loja, regras, blog, equipe e personalização do site.  
+  🟠 Painel completo para servidores de **Minecraft**, com **Dashboard** para loja, regras, blog, equipe e personalização do site.
+- **[Guia de Programação](https://guiaprogramacao.free.nf/)**
+  🟣 Guia completo para programadores que estão começando ou ja estão na área, guia com diversas linguagens e todas auto explicativas com exemplos e exercicios reais.
